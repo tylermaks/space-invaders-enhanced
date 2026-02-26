@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [Range(0.1f, 1.0f)] [SerializeField] private float boundaryPadding = 0.15f;
 
     [Header("Combat")]
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
     
     private float xMin, xMax, yMax;
@@ -59,8 +59,35 @@ public class PlayerController : MonoBehaviour
     {
         if (value.isPressed)
         {
-            GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-            newBullet.GetComponent<Bullet>().SetLimit(yMax);
+            Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         }
+    }
+
+
+    //TODD: Refactor this to use a health component
+    [SerializeField] private float health = 3f;
+
+   private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("EnemyProjectile"))
+        {
+            TakeDamage(1);
+            Destroy(other.gameObject);
+        }
+    }
+
+    void TakeDamage(float amount)
+    {
+        health -= amount;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

@@ -540,8 +540,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 5
   boundaryPadding: 0.15
-  bulletPrefab: {fileID: 6190997383036841158, guid: 077e0528de5b64544a0dd304ce1c6235, type: 3}
+  projectilePrefab: {fileID: 6287397382828974406, guid: d7077f28618da49ecbc0b93dc371da31, type: 3}
   firePoint: {fileID: 810522459}
+  health: 3
 --- !u!50 &2052445585
 Rigidbody2D:
   serializedVersion: 5
